@@ -213,7 +213,7 @@ export default function LandingPage() {
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-blue-400" />{f}</li>
                 ))}
               </ul>
-              <button className="mt-8 w-full rounded-2xl bg-blue-500 py-4 font-semibold text-white hover:bg-blue-600 transition-colors">14일 무료 체험</button>
+              <Link href="/subscribe?plan=premium" className="mt-8 block w-full rounded-2xl bg-blue-500 py-4 font-semibold text-white text-center hover:bg-blue-600 transition-colors">14일 무료 체험</Link>
             </div>
 
             {/* VIP */}
@@ -233,7 +233,7 @@ export default function LandingPage() {
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-yellow-400" />{f}</li>
                 ))}
               </ul>
-              <button className="mt-8 w-full rounded-2xl border border-yellow-500/30 bg-yellow-500/10 py-4 font-semibold text-yellow-400 hover:bg-yellow-500/20 transition-colors">VIP 시작하기</button>
+              <Link href="/subscribe?plan=vip" className="mt-8 block w-full rounded-2xl border border-yellow-500/30 bg-yellow-500/10 py-4 font-semibold text-yellow-400 text-center hover:bg-yellow-500/20 transition-colors">VIP 시작하기</Link>
             </div>
           </div>
         </div>
