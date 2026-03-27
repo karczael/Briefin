@@ -1,5 +1,6 @@
 "use client"
 import { BarChart3, Headphones, Clock, Check, ArrowRight } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
@@ -136,7 +137,7 @@ export default function BriefingPage() {
           <div className="grid gap-6 sm:grid-cols-2">
             {BRIEFING_ANALYSTS.map((a) => (
               <div key={a.id} className="rounded-2xl bg-[hsl(var(--card))] p-6 border border-[hsl(var(--border))] flex gap-4">
-                <img src={`/analysts/${a.id}.png`} alt={a.name} className="h-16 w-16 rounded-full object-cover border-2 border-[hsl(var(--border))] shrink-0" />
+                <Image src={`/analysts/${a.id}.png`} alt={a.name} width={64} height={64} className="h-16 w-16 rounded-full object-cover border-2 border-[hsl(var(--border))] shrink-0" />
                 <div>
                   <p className="font-bold">{a.name}</p>
                   <p className="text-sm text-blue-400">{a.title}</p>
@@ -160,7 +161,7 @@ export default function BriefingPage() {
               <Headphones className="mx-auto h-16 w-16 text-blue-400" />
               <div className="mt-4 flex justify-center -space-x-2">
                 {BRIEFING_ANALYSTS.map((a) => (
-                  <img key={a.id} src={`/analysts/${a.id}.png`} alt="" className="h-10 w-10 rounded-full object-cover border-2 border-[hsl(var(--border))]" />
+                  <Image key={a.id} src={`/analysts/${a.id}.png`} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover border-2 border-[hsl(var(--border))]" />
                 ))}
               </div>
             </div>

@@ -1,5 +1,6 @@
 "use client"
 import { BarChart3, Flame, Headphones, Check, Zap, LineChart, ArrowRight } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
@@ -148,7 +149,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
             {ANALYSTS.map((a) => (
               <div key={a.id} className="rounded-2xl bg-[hsl(var(--card))] p-4 text-center hover:bg-[hsl(var(--muted))] transition-colors border border-transparent hover:border-blue-500/20">
-                <img src={`/analysts/${a.id}.png`} alt={a.name} className="h-16 w-16 rounded-full object-cover mx-auto border-2 border-[hsl(var(--border))]" />
+                <Image src={`/analysts/${a.id}.png`} alt={a.name} width={64} height={64} className="h-16 w-16 rounded-full object-cover mx-auto border-2 border-[hsl(var(--border))]" />
                 <p className="mt-3 text-sm font-bold">{a.name}</p>
                 <p className="text-[11px] text-[hsl(var(--muted-foreground))]">{a.title}</p>
                 <p className="text-[10px] text-blue-400 mt-1 italic">&ldquo;{a.quote}&rdquo;</p>
@@ -166,7 +167,7 @@ export default function LandingPage() {
           <p className="mt-4 text-[hsl(var(--muted-foreground))]">매일 아침·저녁, Apple Podcasts와 Spotify에서 들어보세요</p>
           <div className="mt-8 flex justify-center gap-3">
             {["kim_seongjin", "lee_junhyuk", "han_mirae", "na_daeun"].map((id) => (
-              <img key={id} src={`/analysts/${id}.png`} alt="" className="h-12 w-12 rounded-full object-cover border-2 border-[hsl(var(--border))]" />
+              <Image key={id} src={`/analysts/${id}.png`} alt="" width={48} height={48} className="h-12 w-12 rounded-full object-cover border-2 border-[hsl(var(--border))]" />
             ))}
           </div>
           <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">4명의 AI 전문가가 매일 브리핑합니다</p>

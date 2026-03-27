@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { ANALYSTS } from "@/lib/constants"
 
@@ -14,7 +15,7 @@ export default function Footer() {
           </Link>
           <div className="mt-6 flex justify-center -space-x-2">
             {ANALYSTS.slice(0, 6).map((a) => (
-              <img key={a.id} src={`/analysts/${a.id}.png`} alt="" className="h-8 w-8 rounded-full object-cover border-2 border-[hsl(var(--background))]" />
+              <Image key={a.id} src={`/analysts/${a.id}.png`} alt="" width={32} height={32} className="h-8 w-8 rounded-full object-cover border-2 border-[hsl(var(--background))]" />
             ))}
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/20 text-[10px] font-bold text-blue-400 border-2 border-[hsl(var(--background))]">+4</div>
           </div>

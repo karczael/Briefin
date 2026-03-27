@@ -1,5 +1,6 @@
 "use client"
 import { Flame, Users, Clock, MessageCircle, Vote, Check, Zap } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
@@ -96,7 +97,7 @@ export default function DebatePage() {
             <div className="p-6">
               {DEBATE_EXAMPLE.messages.map((m, i) => (
                 <div key={i} className="flex gap-3 py-3">
-                  <img src={`/analysts/${m.id}.png`} alt={m.name} className="h-9 w-9 rounded-full object-cover shrink-0" />
+                  <Image src={`/analysts/${m.id}.png`} alt={m.name} width={36} height={36} className="h-9 w-9 rounded-full object-cover shrink-0" />
                   <div className="flex-1">
                     <div className="rounded-2xl rounded-tl-sm bg-[hsl(var(--muted))] px-4 py-3">
                       <div className="flex items-center gap-2">
