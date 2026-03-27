@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Check, Shield, ArrowLeft, Zap } from "lucide-react"
 import Link from "next/link"
@@ -46,6 +46,14 @@ interface ReadyResponse {
 }
 
 export default function SubscribePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><span className="h-8 w-8 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" /></div>}>
+      <SubscribeContent />
+    </Suspense>
+  )
+}
+
+function SubscribeContent() {
   const searchParams = useSearchParams()
   const planId = searchParams.get("plan") || "premium"
   const plan = PLANS[planId] || PLANS.premium

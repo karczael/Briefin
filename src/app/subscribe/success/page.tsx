@@ -1,4 +1,5 @@
 "use client"
+import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { CheckCircle } from "lucide-react"
 import Link from "next/link"
@@ -10,6 +11,14 @@ const TIER_NAMES: Record<string, string> = {
 }
 
 export default function SubscribeSuccessPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><span className="h-8 w-8 border-2 border-green-500/30 border-t-green-500 rounded-full animate-spin" /></div>}>
+      <SuccessContent />
+    </Suspense>
+  )
+}
+
+function SuccessContent() {
   const searchParams = useSearchParams()
   const tier = searchParams.get("tier") || "premium"
   const token = searchParams.get("token")
