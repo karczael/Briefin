@@ -149,16 +149,14 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
             {ANALYSTS.map((a) => (
               <div key={a.id} className="rounded-2xl bg-[hsl(var(--card))] p-4 text-center hover:bg-[hsl(var(--muted))] transition-colors border border-transparent hover:border-blue-500/20">
-                <div className="relative inline-block">
-                  <Image src={`/analysts/${a.id}.png`} alt={a.name} width={64} height={64} className="h-16 w-16 rounded-full object-cover mx-auto border-2 border-[hsl(var(--border))]" />
-                  <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 text-[9px] font-bold px-2 py-0.5 rounded-full border whitespace-nowrap ${
-                    a.model === "Gemini" ? "bg-blue-600 text-white border-blue-500" :
-                    a.model === "Claude" ? "bg-amber-600 text-white border-amber-500" :
-                    "bg-emerald-600 text-white border-emerald-500"
-                  }`}>{a.model}</span>
-                </div>
+                <Image src={`/analysts/${a.id}.png`} alt={a.name} width={64} height={64} className="h-16 w-16 rounded-full object-cover mx-auto border-2 border-[hsl(var(--border))]" />
                 <p className="mt-3 text-sm font-bold">{a.name}</p>
                 <p className="text-[11px] text-[hsl(var(--muted-foreground))]">{a.title}</p>
+                <span className={`inline-block mt-1.5 text-[9px] font-bold px-2 py-0.5 rounded-full ${
+                  a.model === "Gemini" ? "bg-blue-600 text-white" :
+                  a.model === "Claude" ? "bg-amber-600 text-white" :
+                  "bg-emerald-600 text-white"
+                }`}>{a.model}</span>
                 <p className="text-[10px] text-blue-400 mt-1 italic">&ldquo;{a.quote}&rdquo;</p>
               </div>
             ))}
