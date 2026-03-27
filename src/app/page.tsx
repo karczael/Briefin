@@ -151,10 +151,10 @@ export default function LandingPage() {
               <div key={a.id} className="rounded-2xl bg-[hsl(var(--card))] p-4 text-center hover:bg-[hsl(var(--muted))] transition-colors border border-transparent hover:border-blue-500/20">
                 <div className="relative inline-block">
                   <Image src={`/analysts/${a.id}.png`} alt={a.name} width={64} height={64} className="h-16 w-16 rounded-full object-cover mx-auto border-2 border-[hsl(var(--border))]" />
-                  <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
-                    a.model === "Gemini" ? "bg-blue-500/20 text-blue-400" :
-                    a.model === "Claude" ? "bg-amber-500/20 text-amber-400" :
-                    "bg-emerald-500/20 text-emerald-400"
+                  <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 text-[9px] font-bold px-2 py-0.5 rounded-full border whitespace-nowrap ${
+                    a.model === "Gemini" ? "bg-blue-600 text-white border-blue-500" :
+                    a.model === "Claude" ? "bg-amber-600 text-white border-amber-500" :
+                    "bg-emerald-600 text-white border-emerald-500"
                   }`}>{a.model}</span>
                 </div>
                 <p className="mt-3 text-sm font-bold">{a.name}</p>
