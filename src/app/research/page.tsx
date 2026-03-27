@@ -180,13 +180,10 @@ export default function ResearchPage() {
             </div>
           </article>
 
-          {/* CTA */}
-          <div className="mt-12 text-center">
-            <p className="text-sm text-[hsl(var(--muted-foreground))] mb-4">이런 리서치 리포트가 매일 발행됩니다</p>
-            <Link href="/#pricing" className="inline-block rounded-2xl bg-blue-500 px-8 py-4 font-semibold text-white hover:bg-blue-600 transition-all hover:scale-[1.02]">
-              14일 무료 체험 시작하기
-            </Link>
-          </div>
+          {/* 안내 문구 */}
+          <p className="mt-8 text-center text-sm text-[hsl(var(--muted-foreground))]">
+            이런 리서치 리포트가 매일 발행됩니다
+          </p>
         </div>
       </section>
 
