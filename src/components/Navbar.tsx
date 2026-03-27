@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -18,7 +19,7 @@ export default function Navbar() {
     <nav className="fixed top-0 z-50 w-full border-b border-[hsl(var(--border))] bg-[hsl(var(--background))]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-sm font-bold">B</div>
+          <Image src="/logo.png" alt="브리핀" width={32} height={32} className="h-8 w-8" />
           <span className="text-lg font-bold text-[hsl(var(--foreground))]">브리핀</span>
         </Link>
         <div className="hidden md:flex items-center gap-5 text-sm text-[hsl(var(--muted-foreground))]">
