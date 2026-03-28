@@ -142,7 +142,7 @@ function SubscribeContent() {
                 결제 정보를 등록만 해두고, <strong>14일간 모든 기능을 무료</strong>로 이용해보세요.
                 14일이 되기 전에 언제든 취소할 수 있으며, 취소 시 비용이 청구되지 않습니다.
               </p>
-              <div className="flex items-center gap-4 text-xs text-[hsl(var(--muted-foreground))]">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[hsl(var(--muted-foreground))]">
                 <span>✓ 0원 결제</span>
                 <span>✓ 14일 내 취소 가능</span>
                 <span>✓ 자동 갱신 해지 자유</span>

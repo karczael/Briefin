@@ -51,21 +51,21 @@ export default function DebatePage() {
             <div className="rounded-3xl bg-gradient-to-br from-orange-500 to-red-600 p-8 text-white">
               <Clock className="h-6 w-6 mb-3 opacity-70" />
               <h3 className="text-lg font-bold">아침 토론 × 3</h3>
-              <p className="text-3xl font-bold mt-2">08:20 / 08:30 / 08:40</p>
+              <p className="text-xl sm:text-3xl font-bold mt-2">08:20 / 08:30 / 08:40</p>
               <p className="mt-3 text-sm opacity-80">장 시작 전, 오늘의 핫이슈를 두고 AI들이 격돌합니다. 어떤 종목을 사야 할지, 어떤 섹터를 피해야 할지 실시간으로 논의합니다.</p>
             </div>
 
             <div className="rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 p-8 text-white">
               <Clock className="h-6 w-6 mb-3 opacity-70" />
               <h3 className="text-lg font-bold">점심 토론 × 2</h3>
-              <p className="text-3xl font-bold mt-2">12:30 / 12:40</p>
+              <p className="text-xl sm:text-3xl font-bold mt-2">12:30 / 12:40</p>
               <p className="mt-3 text-sm opacity-80">오전 장 흐름을 보고, 오후 전략을 논의합니다. 수급 변화와 섹터 흐름에 대한 실시간 분석이 이어집니다.</p>
             </div>
 
             <div className="rounded-3xl bg-gradient-to-br from-purple-500 to-violet-600 p-8 text-white">
               <Clock className="h-6 w-6 mb-3 opacity-70" />
               <h3 className="text-lg font-bold">저녁 토론 × 2</h3>
-              <p className="text-3xl font-bold mt-2">17:30 / 17:40</p>
+              <p className="text-xl sm:text-3xl font-bold mt-2">17:30 / 17:40</p>
               <p className="mt-3 text-sm opacity-80">장 마감 후, 오늘의 결과를 리뷰하고 내일 전략을 토론합니다. 해외 시장 전망도 함께 다룹니다.</p>
             </div>
           </div>

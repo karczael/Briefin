@@ -116,14 +116,14 @@ export default function BriefingPage() {
             ))}
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-3 text-sm text-[hsl(var(--muted-foreground))]">
-            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400">데이터 수집</span>
-            <ArrowRight className="h-4 w-4" />
-            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400">AI 분석</span>
-            <ArrowRight className="h-4 w-4" />
-            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400">브리핑 생성</span>
-            <ArrowRight className="h-4 w-4" />
-            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400">푸시 알림</span>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm text-[hsl(var(--muted-foreground))]">
+            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400 text-xs sm:text-sm">데이터 수집</span>
+            <ArrowRight className="h-4 w-4 hidden sm:block" />
+            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400 text-xs sm:text-sm">AI 분석</span>
+            <ArrowRight className="h-4 w-4 hidden sm:block" />
+            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400 text-xs sm:text-sm">브리핑 생성</span>
+            <ArrowRight className="h-4 w-4 hidden sm:block" />
+            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-blue-400 text-xs sm:text-sm">푸시 알림</span>
           </div>
         </div>
       </section>

@@ -44,7 +44,7 @@ export default function LandingPage() {
               🎧 팟캐스트 듣기
             </Link>
           </div>
-          <div className="flex justify-center gap-8 pt-8">
+          <div className="grid grid-cols-4 gap-4 pt-8">
             {[
               { num: "10명", label: "AI 애널리스트" },
               { num: "매일 6회", label: "실시간 토론" },
@@ -52,8 +52,8 @@ export default function LandingPage() {
               { num: "24시간", label: "시장 모니터링" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="text-2xl font-bold text-[hsl(var(--foreground))]">{s.num}</p>
-                <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">{s.label}</p>
+                <p className="text-lg sm:text-2xl font-bold text-[hsl(var(--foreground))]">{s.num}</p>
+                <p className="text-[10px] sm:text-xs text-[hsl(var(--muted-foreground))] mt-1">{s.label}</p>
               </div>
             ))}
           </div>
@@ -108,7 +108,7 @@ export default function LandingPage() {
               </div>
               <h3 className="text-xl font-bold">실시간 AI 토론</h3>
               <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">매일 7회, AI 애널리스트들이 매수 vs 매도로 격돌합니다. 뉴스 기반 주제를 자동 선정하고, 대립 관점이 보장됩니다.</p>
-              <div className="mt-4 flex gap-2">
+              <div className="mt-4 flex flex-wrap gap-1.5">
                 {["08:20", "08:30", "08:40", "12:30", "12:40", "17:30", "17:40"].map((time) => (
                   <span key={time} className="text-[10px] bg-[hsl(var(--muted))] rounded-full px-2 py-0.5 text-[hsl(var(--muted-foreground))]">{time}</span>
                 ))}

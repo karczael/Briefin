@@ -99,8 +99,8 @@ export default function ResearchPage() {
               {/* 데이터 테이블 */}
               <div>
                 <h3 className="font-bold text-base mb-3">2. 수혜 종목 분석</h3>
-                <div className="rounded-xl border border-[hsl(var(--border))] overflow-hidden">
-                  <table className="w-full text-sm">
+                <div className="rounded-xl border border-[hsl(var(--border))] overflow-x-auto">
+                  <table className="w-full text-sm min-w-0">
                     <thead>
                       <tr className="bg-[hsl(var(--muted))]/50 text-[hsl(var(--muted-foreground))]">
                         <th className="px-4 py-2.5 text-left font-medium">종목</th>
