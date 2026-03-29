@@ -169,16 +169,16 @@ export default function LandingPage() {
         <div className="mx-auto max-w-3xl text-center">
           <Headphones className="mx-auto h-12 w-12 text-blue-400" />
           <h2 className="mt-6 text-3xl font-bold">출퇴근길에<br /><span className="text-blue-400">이어폰으로 듣는</span> AI 브리핑</h2>
-          <p className="mt-4 text-[hsl(var(--muted-foreground))]">매일 아침·저녁, Apple Podcasts와 Spotify에서 들어보세요</p>
-          <div className="mt-8 flex justify-center gap-3">
-            {["kim_seongjin", "lee_junhyuk", "han_mirae", "na_daeun"].map((id) => (
-              <Image key={id} src={`/analysts/${id}.png`} alt="" width={48} height={48} className="h-12 w-12 rounded-full object-cover border-2 border-[hsl(var(--border))]" />
+          <p className="mt-4 text-[hsl(var(--muted-foreground))]">매일 아침·점심·저녁, Spotify와 YouTube Music에서 들어보세요</p>
+          <div className="mt-8 flex justify-center gap-3 flex-wrap">
+            {["kim_seongjin", "lee_junhyuk", "han_mirae", "na_daeun", "park_haeun", "choi_sumin", "james_park", "yoon_seoyeon", "jung_daeho", "oh_taeseok"].map((id) => (
+              <Image key={id} src={`/analysts/${id}.png`} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover border-2 border-[hsl(var(--border))]" />
             ))}
           </div>
-          <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">4명의 AI 전문가가 매일 브리핑합니다</p>
+          <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">10명의 AI 전문가가 아침 4명, 점심 3명, 오후 3명 매일 브리핑합니다</p>
           <div className="mt-6 flex justify-center gap-4">
-            <div className="rounded-2xl bg-[hsl(var(--card))] px-6 py-3 text-sm font-medium border border-[hsl(var(--border))]">🎵 Apple Podcasts</div>
             <div className="rounded-2xl bg-[hsl(var(--card))] px-6 py-3 text-sm font-medium border border-[hsl(var(--border))]">🎵 Spotify</div>
+            <div className="rounded-2xl bg-[hsl(var(--card))] px-6 py-3 text-sm font-medium border border-[hsl(var(--border))]">🎵 YouTube Music</div>
           </div>
         </div>
       </section>

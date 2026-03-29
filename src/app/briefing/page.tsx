@@ -168,12 +168,12 @@ export default function BriefingPage() {
             <div>
               <h3 className="text-xl font-bold">출퇴근길에 이어폰으로 듣는 AI 브리핑</h3>
               <p className="mt-2 text-sm text-[hsl(var(--muted-foreground))]">
-                매일 아침·저녁 브리핑을 팟캐스트로 들어보세요. 각 애널리스트의 고유 음성으로
+                매일 아침·점심·저녁 브리핑을 팟캐스트로 들어보세요. 각 애널리스트의 고유 음성으로
                 자연스럽게 들을 수 있습니다. Gemini TTS 기반으로 사람처럼 자연스러운 나레이션을 제공합니다.
               </p>
               <div className="mt-4 flex gap-3">
-                <div className="rounded-2xl bg-[hsl(var(--muted))] px-5 py-2.5 text-sm font-medium">🎵 Apple Podcasts</div>
                 <div className="rounded-2xl bg-[hsl(var(--muted))] px-5 py-2.5 text-sm font-medium">🎵 Spotify</div>
+                <div className="rounded-2xl bg-[hsl(var(--muted))] px-5 py-2.5 text-sm font-medium">🎵 YouTube Music</div>
               </div>
             </div>
           </div>
