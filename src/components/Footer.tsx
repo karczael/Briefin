@@ -17,10 +17,13 @@ export default function Footer() {
             <a href="mailto:corecodecto@gmail.com" className="hover:text-[hsl(var(--foreground))]">문의</a>
           </div>
         </div>
-        <p className="mt-8 text-center text-xs text-[hsl(var(--muted-foreground))]">
-          ⚠️ 본 서비스의 정보는 투자 권유가 아닌 AI 기반 시장 분석 자료입니다. 투자 판단은 본인 책임입니다.
-        </p>
-        <p className="mt-2 text-center text-xs text-[hsl(var(--muted-foreground))]">© 2026 Briefin. All rights reserved.</p>
+        {/* 사업자 정보 */}
+        <div className="mt-8 text-center text-xs text-[hsl(var(--muted-foreground))] leading-relaxed space-y-0.5">
+          <p>코어코드 | 대표 김영평 | 사업자등록번호 599-31-01857</p>
+          <p>서울시 방배천로34길 11, 501호 | 연락처 010-2688-4351</p>
+          <p className="mt-2">⚠️ 본 서비스의 정보는 투자 권유가 아닌 AI 기반 시장 분석 자료입니다. 투자 판단은 본인 책임입니다.</p>
+        </div>
+        <p className="mt-2 text-center text-xs text-[hsl(var(--muted-foreground))]">© 2026 코어코드. All rights reserved.</p>
       </footer>
     </>
   )
