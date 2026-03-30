@@ -75,7 +75,7 @@ export default function LandingPage() {
               <p className="mt-3 text-sm opacity-80">매일 3번, 10명의 AI 전문가가 뉴스·시장데이터·해외 헤드라인을 종합 분석합니다. 출근 전 10분이면 충분합니다.</p>
               <ul className="mt-4 space-y-1.5 text-sm opacity-70">
                 <li>• 실시간 뉴스 기반 분석 (일반론 아님)</li>
-                <li>• 관심종목 기반 개인화 브리핑</li>
+                <li>• 10명 AI 애널리스트의 다양한 관점</li>
                 <li>• 팟캐스트로 출퇴근길에 청취</li>
               </ul>
               <div className="mt-6 flex items-center gap-1 text-sm font-medium opacity-80 group-hover:opacity-100">
@@ -210,7 +210,7 @@ export default function LandingPage() {
               <p className="text-xs text-[hsl(var(--muted-foreground))]">하루 약 500원</p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
-                  "전체 브리핑 (모닝/점심/클로징)", "개인화 브리핑 (관심종목 기반)",
+                  "전체 브리핑 (모닝/점심/클로징)",
                   "AI 리서치 전문 읽기", "토론방 상세 분석",
                   "밸류에이션 차트 + 적정가 계산기", "팟캐스트 (출퇴근길 청취)",
                   "기업 분석 + 실적 전망",

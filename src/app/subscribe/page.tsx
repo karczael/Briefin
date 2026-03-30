@@ -13,7 +13,6 @@ const PLANS: Record<string, { name: string; price: number; priceLabel: string; f
     priceLabel: "₩14,900/월",
     features: [
       "전체 브리핑 (모닝/점심/클로징)",
-      "개인화 브리핑 (관심종목 기반)",
       "AI 리서치 전문 읽기",
       "토론방 상세 분석",
       "밸류에이션 차트 + 적정가 계산기",

@@ -88,7 +88,7 @@ export default function BriefingPage() {
                 <li className="flex items-start gap-2"><span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-white/60 shrink-0" />오늘 시장 종합 리뷰</li>
                 <li className="flex items-start gap-2"><span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-white/60 shrink-0" />수급 분석 + 섹터 마감 정리</li>
                 <li className="flex items-start gap-2"><span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-white/60 shrink-0" />해외 헤드라인 + 내일 이슈</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-white/60 shrink-0" />관심종목 기반 개인화 (Premium)</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-white/60 shrink-0" />애널리스트별 고유 관점 비교 (Premium)</li>
               </ul>
             </div>
           </div>
@@ -198,7 +198,7 @@ export default function BriefingPage() {
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 text-blue-400 shrink-0" />모닝·점심·클로징 전체 브리핑</li>
                 <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 text-blue-400 shrink-0" />10명 애널리스트 전원 관점</li>
-                <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 text-blue-400 shrink-0" />관심종목 기반 개인화 브리핑</li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 text-blue-400 shrink-0" />AI 리서치 리포트 전문</li>
                 <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 text-blue-400 shrink-0" />팟캐스트 청취</li>
                 <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 text-blue-400 shrink-0" />푸시 알림</li>
               </ul>

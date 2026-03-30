@@ -65,7 +65,7 @@ export default function PrivacyPage() {
 
           <Section title="제2조 (개인정보의 수집 및 이용 목적)">
             <ol className="list-decimal pl-5 space-y-2">
-              <li><strong>서비스 제공</strong>: 회원 인증, 개인화 브리핑 생성, 관심종목 기반 콘텐츠 제공</li>
+              <li><strong>서비스 제공</strong>: 회원 인증, AI 브리핑 생성, 관심종목 기반 콘텐츠 제공</li>
               <li><strong>구독 관리</strong>: 결제 처리, 구독 상태 관리, 요금 청구</li>
               <li><strong>서비스 개선</strong>: 이용 통계 분석, 서비스 품질 향상, 신규 기능 개발</li>
               <li><strong>고객 지원</strong>: 문의 대응, 공지사항 전달, 불만 처리</li>
