@@ -48,7 +48,7 @@ export default function LandingPage() {
             {[
               { num: "10명", label: "AI 애널리스트" },
               { num: "매일 6회", label: "실시간 토론" },
-              { num: "7개", label: "투자 전략" },
+              { num: "12개", label: "투자 전략" },
               { num: "24시간", label: "시장 모니터링" },
             ].map((s) => (
               <div key={s.label} className="text-center">
@@ -125,9 +125,9 @@ export default function LandingPage() {
                 <span className="text-xs font-medium text-yellow-400 bg-yellow-500/10 rounded-full px-2 py-0.5">VIP</span>
               </div>
               <h3 className="text-xl font-bold">VIP 투자 도구</h3>
-              <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">7개 매매 전략 설정, 실시간 신호 알림, 자동 손절 서비스. 분석을 넘어 실전 투자까지 AI가 실행합니다.</p>
+              <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">12개 매매 전략 설정, 실시간 신호 알림, 자동 손절 서비스. 분석을 넘어 실전 투자까지 AI가 실행합니다.</p>
               <ul className="mt-4 space-y-1.5 text-sm text-[hsl(var(--muted-foreground))]">
-                <li>• 골든크로스, RSI, MACD 등 7개 전략</li>
+                <li>• RSI+MACD, 트레일링 스탑, 스윙 등 12개 전략</li>
                 <li>• 한국투자증권 API 연동 자동 손절</li>
                 <li>• 전략 백테스트 (최대 5년)</li>
               </ul>
@@ -196,7 +196,7 @@ export default function LandingPage() {
               <p className="mt-6 text-3xl font-bold">₩0</p>
               <p className="text-sm text-[hsl(var(--muted-foreground))]">영구 무료</p>
               <ul className="mt-6 space-y-3 text-sm">
-                {["브리핑 요약 3줄", "토론방 시청", "리서치 제목", "기본 시황", "관심종목 관리"].map((f) => (
+                {["모닝 브리핑 전문 (매일)", "AI 리서치 하루 1편", "자유 토론방 참여", "기본 시황", "관심종목 관리"].map((f) => (
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-[hsl(var(--muted-foreground))]" />{f}</li>
                 ))}
               </ul>
@@ -206,8 +206,8 @@ export default function LandingPage() {
             <div className="relative rounded-3xl border-2 border-blue-500 bg-blue-500/5 p-8">
               <div className="absolute -top-3 left-6 rounded-full bg-blue-500 px-4 py-1 text-xs font-bold text-white">추천</div>
               <h3 className="text-lg font-bold">Premium</h3>
-              <p className="mt-6"><span className="text-3xl font-bold">₩14,900</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
-              <p className="text-xs text-[hsl(var(--muted-foreground))]">하루 약 500원</p>
+              <p className="mt-6"><span className="text-3xl font-bold">₩9,900</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
+              <p className="text-xs text-[hsl(var(--muted-foreground))]">하루 약 330원</p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
                   "전체 브리핑 (모닝/점심/클로징)",
@@ -224,12 +224,12 @@ export default function LandingPage() {
             {/* VIP */}
             <div className="rounded-3xl border border-[hsl(var(--border))] bg-gradient-to-b from-[hsl(var(--card))] to-transparent p-8">
               <h3 className="text-lg font-bold flex items-center gap-2"><Zap className="h-5 w-5 text-yellow-400" /> VIP</h3>
-              <p className="mt-6"><span className="text-3xl font-bold">₩29,900</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
+              <p className="mt-6"><span className="text-3xl font-bold">₩19,800</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
               <p className="text-xs text-[hsl(var(--muted-foreground))]">프로 투자자를 위한</p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
                   "Premium 전체 기능",
-                  "매매 전략 설정 (7개 전략)",
+                  "매매 전략 설정 (12개 전략)",
                   "실시간 매매 신호 알림",
                   "전략 백테스트",
                   "자동 손절 서비스 (KIS 연동)",

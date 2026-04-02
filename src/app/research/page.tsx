@@ -1,18 +1,23 @@
 "use client"
 import { LineChart, TrendingUp, Clock, User } from "lucide-react"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+
+const NeuralNetwork = dynamic(() => import("@/components/NeuralNetwork"), { ssr: false })
 
 export default function ResearchPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero */}
-      <section className="px-6 pt-32 pb-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-400 mb-6">
+      {/* Hero — AI 뉴런 네트워크 */}
+      <section className="relative px-6 pt-32 pb-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #05100d 0%, #0d1117 60%, hsl(var(--background)) 100%)" }}>
+        <NeuralNetwork />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#05100d]/50 via-transparent to-[#0d1117]/80 pointer-events-none" style={{ zIndex: 1 }} />
+        <div className="relative mx-auto max-w-4xl text-center" style={{ zIndex: 2 }}>
+          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-400 mb-6 backdrop-blur-sm">
             <LineChart className="h-4 w-4" /> AI 리서치
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight">

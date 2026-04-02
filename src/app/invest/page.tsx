@@ -1,17 +1,25 @@
 "use client"
 import { Zap, Shield, Bell, FlaskConical, Check } from "lucide-react"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
+const TickerParticles = dynamic(() => import("@/components/TickerParticles"), { ssr: false })
+
 const STRATEGIES = [
-  { name: "골든크로스", desc: "단기 이평선이 장기 이평선을 상향 돌파할 때 긍정 시그널", color: "text-blue-400" },
-  { name: "RSI 과매도 반등", desc: "RSI 30 이하 과매도 구간에서 반등 시 긍정 시그널", color: "text-emerald-400" },
-  { name: "볼린저밴드 스퀴즈", desc: "밴드 수축 후 확장 시 추세 돌파 시그널", color: "text-purple-400" },
-  { name: "MACD 다이버전스", desc: "가격과 MACD의 방향이 불일치할 때 반전 시그널", color: "text-orange-400" },
-  { name: "밸류+모멘텀 복합", desc: "저평가(PER/PBR) + 최근 상승 모멘텀 결합 전략", color: "text-yellow-400" },
-  { name: "이격도 반전", desc: "20일 이평선 대비 괴리율이 극단값일 때 반전 시그널", color: "text-red-400" },
-  { name: "수급 모멘텀", desc: "외국인/기관 순매수 3일 연속 시 추세 추종 시그널", color: "text-teal-400" },
+  { name: "RSI+MACD 복합", desc: "RSI 과매도/과매수 + MACD 골든/데드크로스 조합. 하락장 방어력 우수", color: "text-blue-400", category: "기본" },
+  { name: "이평선 정배열", desc: "MA20 > MA60 > MA120 정배열 교차 시 매수. 추세 확인 후 안전 진입", color: "text-emerald-400", category: "추세" },
+  { name: "VCP 패턴", desc: "변동성 축소 후 고점 돌파. 패턴 성공 시 큰 수익", color: "text-purple-400", category: "패턴" },
+  { name: "MA20 눌림목", desc: "상승 추세 중 MA20 근처 조정 시 매수. 장투 시 높은 수익률", color: "text-orange-400", category: "추세" },
+  { name: "컵앤핸들", desc: "U자형 컵 + 소폭 조정 핸들 돌파. 클래식 차트 패턴", color: "text-yellow-400", category: "패턴" },
+  { name: "변동성 돌파", desc: "래리 윌리엄스 K값 기반 당일 돌파 전략", color: "text-red-400", category: "변동성" },
+  { name: "트레일링 스탑", desc: "모멘텀 진입 + 고점 대비 하락 시 자동 매도. 상승장 폭발적 수익", color: "text-teal-400", category: "리스크" },
+  { name: "로테이션", desc: "RSI+MACD+모멘텀 스코어 기반 보유/매도 판단. 상승장 최고 수익률", color: "text-cyan-400", category: "로테이션" },
+  { name: "SMMA 프랙탈", desc: "SMMA 정배열 + 프랙탈 고점 돌파. 장기 추세 추종", color: "text-indigo-400", category: "핵심" },
+  { name: "스윙 눌림목", desc: "상승 추세 중 MA20 눌림목 양봉 매수. 스윙 트레이딩 특화", color: "text-pink-400", category: "스윙" },
+  { name: "스윙 돌파", desc: "횡보 구간 저항선 거래량 동반 돌파. 돌파 성공 시 큰 수익", color: "text-amber-400", category: "스윙" },
+  { name: "스윙 반등", desc: "과매도 RSI + 볼린저 하단 반등 매수. 하락장 유일 양수 수익", color: "text-lime-400", category: "스윙" },
 ]
 
 export default function InvestPage() {
@@ -19,10 +27,13 @@ export default function InvestPage() {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero */}
-      <section className="px-6 pt-32 pb-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-400 mb-6">
+      {/* Hero — 틱커 파티클 배경 */}
+      <section className="relative px-6 pt-32 pb-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #0a0e27 0%, #0d1117 60%, hsl(var(--background)) 100%)" }}>
+        <TickerParticles />
+        {/* 콘텐츠 위 그라데이션 오버레이 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e27]/60 via-transparent to-[#0d1117]/80 pointer-events-none" style={{ zIndex: 1 }} />
+        <div className="relative mx-auto max-w-4xl text-center" style={{ zIndex: 2 }}>
+          <div className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-400 mb-6 backdrop-blur-sm">
             <Zap className="h-4 w-4" /> VIP 투자 도구
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
@@ -30,7 +41,7 @@ export default function InvestPage() {
             <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">실전 투자까지</span>
           </h1>
           <p className="mt-6 text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
-            7개의 검증된 매매 전략 설정, 실시간 신호 알림, 자동 손절까지.
+            12개의 검증된 매매 전략 설정, 실시간 신호 알림, 자동 손절까지.
             AI가 분석하고 당신이 결정하면, 실행은 시스템이 합니다.
           </p>
           <Link href="/#pricing" className="mt-8 inline-block rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 font-semibold text-white hover:opacity-90 transition-all hover:scale-[1.02]">
@@ -39,23 +50,24 @@ export default function InvestPage() {
         </div>
       </section>
 
-      {/* 7개 매매 전략 */}
+      {/* 12개 매매 전략 */}
       <section className="px-6 py-20">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold text-center mb-4">7개의 검증된 매매 전략</h2>
+          <h2 className="text-2xl font-bold text-center mb-4">12개의 검증된 매매 전략</h2>
           <p className="text-center text-[hsl(var(--muted-foreground))] mb-12">원하는 전략을 선택하고 파라미터를 조절하세요. 조건 충족 시 실시간 알림을 받습니다.</p>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {STRATEGIES.map((s) => (
               <div key={s.name} className="rounded-2xl bg-[hsl(var(--card))] p-6 border border-[hsl(var(--border))] hover:border-yellow-500/20 transition-colors">
-                <h4 className={`font-bold ${s.color}`}>{s.name}</h4>
-                <p className="mt-2 text-sm text-[hsl(var(--muted-foreground))] leading-relaxed">{s.desc}</p>
+                <div className="flex items-center gap-2 mb-2">
+                  <h4 className={`font-bold ${s.color}`}>{s.name}</h4>
+                  <span className="text-[10px] font-medium text-[hsl(var(--muted-foreground))] bg-[hsl(var(--muted))] rounded-full px-2 py-0.5">{s.category}</span>
+                </div>
+                <p className="text-sm text-[hsl(var(--muted-foreground))] leading-relaxed">{s.desc}</p>
               </div>
             ))}
-            <div className="rounded-2xl bg-gradient-to-br from-yellow-500/10 to-orange-500/10 p-6 border border-yellow-500/20 flex items-center justify-center">
-              <p className="text-sm text-yellow-400 font-medium text-center">전략별 파라미터 커스터마이징<br />+ 복수 전략 동시 운용</p>
-            </div>
           </div>
+          <p className="mt-6 text-center text-sm text-yellow-400/80">전략별 파라미터 커스터마이징 + 복수 전략 동시 운용 가능</p>
         </div>
       </section>
 

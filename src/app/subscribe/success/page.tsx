@@ -65,12 +65,12 @@ function SuccessContent() {
 
         {/* CTA 버튼 */}
         <div className="space-y-3 pt-2">
-          <Link
-            href="/"
+          <a
+            href="https://app.briefin.kr"
             className="block w-full rounded-2xl bg-blue-500 py-4 font-semibold text-white text-center hover:bg-blue-600 transition-colors"
           >
             브리핀 시작하기
-          </Link>
+          </a>
           <Link
             href="/"
             className="block text-sm text-[hsl(var(--muted-foreground))] hover:underline"

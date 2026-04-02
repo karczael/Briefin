@@ -1,16 +1,19 @@
 "use client"
-import { Suspense, useState } from "react"
+import { Suspense, useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
-import { Check, Shield, ArrowLeft, Zap } from "lucide-react"
+import { Check, Shield, ArrowLeft, Zap, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { apiPost } from "@/lib/api"
+import { loadTossPayments } from "@tosspayments/tosspayments-sdk"
+
+const TOSS_CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || ""
 
 // 요금제 정보
 const PLANS: Record<string, { name: string; price: number; priceLabel: string; features: string[] }> = {
   premium: {
     name: "Premium",
-    price: 14900,
-    priceLabel: "₩14,900/월",
+    price: 9900,
+    priceLabel: "₩9,900/월",
     features: [
       "전체 브리핑 (모닝/점심/클로징)",
       "AI 리서치 전문 읽기",
@@ -22,11 +25,11 @@ const PLANS: Record<string, { name: string; price: number; priceLabel: string; f
   },
   vip: {
     name: "VIP",
-    price: 29900,
-    priceLabel: "₩29,900/월",
+    price: 19800,
+    priceLabel: "₩19,800/월",
     features: [
       "Premium 전체 기능",
-      "매매 전략 설정 (7개 전략)",
+      "매매 전략 설정 (12개 전략)",
       "실시간 매매 신호 알림",
       "전략 백테스트",
       "자동 손절 서비스 (KIS 연동)",
@@ -35,13 +38,25 @@ const PLANS: Record<string, { name: string; price: number; priceLabel: string; f
   },
 }
 
-interface ReadyResponse {
-  tid: string
-  redirect_url: string
-  redirect_mobile_url: string
-  user_id: string
+// 고객 키 생성 (빌링용)
+function generateCustomerKey(): string {
+  const timestamp = Date.now()
+  const random = Math.random().toString(36).substring(2, 10)
+  return `cust-${timestamp}-${random}`
+}
+
+interface RegisterResponse {
   access_token: string
   refresh_token: string
+  token_type: string
+}
+
+interface BillingKeyResponse {
+  success: boolean
+  tier: string
+  trial_ends_at: string
+  expires_at: string
+  message: string
 }
 
 export default function SubscribePage() {
@@ -63,36 +78,142 @@ function SubscribeContent() {
   const [agreed, setAgreed] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [step, setStep] = useState<"form" | "billing_callback">("form")
+  const tossRef = useRef<any>(null)
+
+  // SDK 초기화
+  useEffect(() => {
+    if (!TOSS_CLIENT_KEY) return
+    loadTossPayments(TOSS_CLIENT_KEY)
+      .then((toss) => { tossRef.current = toss })
+      .catch((err) => console.error("토스 SDK 로드 실패:", err))
+  }, [])
+
+  // URL 파라미터에서 토스 빌링 인증 결과 처리 (콜백)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const authKey = params.get("authKey")
+    const customerKey = params.get("customerKey")
+    const callbackPlanId = params.get("planId")
+
+    if (authKey && customerKey && callbackPlanId) {
+      setStep("billing_callback")
+      handleBillingCallback(authKey, customerKey, callbackPlanId)
+    }
+
+    // 결제 실패/취소 시
+    const payError = params.get("error")
+    if (payError) {
+      setError("결제가 취소되었거나 실패했습니다. 다시 시도해주세요.")
+    }
+  }, [])
+
+  // 빌링 인증 콜백 → 백엔드에 빌링키 발급 요청
+  const handleBillingCallback = async (authKey: string, customerKey: string, callbackPlanId: string) => {
+    setLoading(true)
+    const token = localStorage.getItem("access_token")
+    if (!token) {
+      setError("인증 정보가 없습니다. 처음부터 다시 시도해주세요.")
+      setStep("form")
+      setLoading(false)
+      return
+    }
+
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api/v1"
+      const res = await fetch(`${API_URL}/subscriptions/toss/billing-key`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          auth_key: authKey,
+          customer_key: customerKey,
+          plan_id: callbackPlanId,
+        }),
+      })
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: "빌링키 발급에 실패했습니다" }))
+        throw new Error(err.detail || "구독 처리에 실패했습니다")
+      }
+
+      const data: BillingKeyResponse = await res.json()
+      if (data.success) {
+        // 성공 → 성공 페이지로 이동
+        window.location.href = `/subscribe/success?token=${token}&tier=${callbackPlanId}`
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "구독 처리 중 오류가 발생했습니다")
+      setStep("form")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   // 이메일 형식 검사
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const isFormValid = isEmailValid && password.length >= 8 && nickname.length >= 1 && agreed
 
+  // 회원가입 → 토스 빌링 인증 요청
   const handleSubmit = async () => {
     if (!isFormValid || loading) return
+    if (!tossRef.current) {
+      setError("결제 모듈을 불러오는 중입니다. 잠시 후 다시 시도해주세요.")
+      return
+    }
+
     setLoading(true)
     setError("")
 
     try {
-      const data = await apiPost<ReadyResponse>("/subscriptions/kakaopay/ready", {
-        plan_id: planId,
+      // 1단계: 회원가입 → JWT 획득
+      const data = await apiPost<RegisterResponse>("/auth/register", {
         email,
         password,
         nickname,
       })
 
-      // JWT 토큰 저장 (approve 후 사용)
+      // JWT 저장 (빌링키 발급 시 필요)
       localStorage.setItem("access_token", data.access_token)
       localStorage.setItem("refresh_token", data.refresh_token)
 
-      // 카카오페이 결제창으로 이동 (모바일/PC 자동 판별)
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-      const redirectUrl = isMobile ? data.redirect_mobile_url : data.redirect_url
-      window.location.href = redirectUrl
+      // 2단계: 토스 빌링 인증 (카드 등록)
+      const customerKey = generateCustomerKey()
+      const currentUrl = `${window.location.origin}/subscribe`
+      const payment = tossRef.current.payment({ customerKey })
+
+      await payment.requestBillingAuth({
+        method: "CARD",
+        successUrl: `${currentUrl}?planId=${planId}`,
+        failUrl: `${currentUrl}?error=billing_failed`,
+      })
     } catch (e) {
       setError(e instanceof Error ? e.message : "오류가 발생했습니다")
       setLoading(false)
     }
+  }
+
+  // 빌링 콜백 처리 중 화면
+  if (step === "billing_callback") {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-6 bg-[hsl(var(--background))]">
+        <div className="text-center space-y-4">
+          <Loader2 className="h-10 w-10 animate-spin mx-auto text-blue-500" />
+          <p className="text-lg font-medium">구독을 처리하고 있습니다...</p>
+          <p className="text-sm text-[hsl(var(--muted-foreground))]">잠시만 기다려주세요</p>
+          {error && (
+            <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400 mt-4">
+              {error}
+              <Link href={`/subscribe?plan=${planId}`} className="block mt-2 underline">
+                다시 시도하기
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -216,23 +337,19 @@ function SubscribeContent() {
           </div>
         )}
 
-        {/* ─── 카카오페이 결제 버튼 ─── */}
+        {/* ─── 토스 결제 버튼 ─── */}
         <button
           onClick={handleSubmit}
           disabled={!isFormValid || loading}
-          className="w-full rounded-2xl py-4 font-bold text-lg transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-          style={{
-            backgroundColor: isFormValid && !loading ? "#FEE500" : "#FEE500",
-            color: "#191919",
-          }}
+          className="w-full rounded-2xl bg-[#3182F6] py-4 font-bold text-lg text-white transition-all hover:bg-[#2272E6] disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {loading ? (
             <span className="flex items-center justify-center gap-2">
-              <span className="h-5 w-5 border-2 border-[#191919]/30 border-t-[#191919] rounded-full animate-spin" />
+              <Loader2 className="h-5 w-5 animate-spin" />
               처리 중...
             </span>
           ) : (
-            "카카오페이로 시작하기"
+            "무료 체험 시작하기"
           )}
         </button>
 

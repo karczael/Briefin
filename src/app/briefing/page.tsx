@@ -2,9 +2,12 @@
 import { BarChart3, Headphones, Clock, Check, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import { ANALYSTS } from "@/lib/constants"
+
+const GlassDashboard = dynamic(() => import("@/components/GlassDashboard"), { ssr: false })
 
 // 브리핑 담당 애널리스트
 const BRIEFING_ANALYSTS = ANALYSTS.filter(a =>
@@ -16,10 +19,12 @@ export default function BriefingPage() {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero */}
-      <section className="px-6 pt-32 pb-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-400 mb-6">
+      {/* Hero — 글래스모피즘 대시보드 프리뷰 */}
+      <section className="relative px-6 pt-32 pb-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #070b1a 0%, #0d1117 60%, hsl(var(--background)) 100%)" }}>
+        <GlassDashboard />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#070b1a]/40 via-transparent to-[#0d1117]/70 pointer-events-none" style={{ zIndex: 1 }} />
+        <div className="relative mx-auto max-w-4xl text-center" style={{ zIndex: 2 }}>
+          <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-400 mb-6 backdrop-blur-sm">
             <BarChart3 className="h-4 w-4" /> AI 브리핑
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
@@ -188,9 +193,9 @@ export default function BriefingPage() {
             <div className="rounded-2xl border border-[hsl(var(--border))] p-6">
               <h3 className="font-bold text-lg mb-4">Free</h3>
               <ul className="space-y-3 text-sm text-[hsl(var(--muted-foreground))]">
-                <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 shrink-0" />브리핑 요약 3줄</li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 shrink-0" />모닝 브리핑 전문 (매일)</li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 shrink-0" />AI 리서치 하루 1편</li>
                 <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 shrink-0" />기본 시황 정보</li>
-                <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 shrink-0" />모닝 브리핑만 제공</li>
               </ul>
             </div>
             <div className="rounded-2xl border-2 border-blue-500 bg-blue-500/5 p-6">

@@ -2,8 +2,11 @@
 import { Flame, Users, Clock, MessageCircle, Vote, Check, Zap } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+
+const VersusClash = dynamic(() => import("@/components/VersusClash"), { ssr: false })
 
 // 토론 예시 메시지
 const DEBATE_EXAMPLE = {
@@ -22,10 +25,12 @@ export default function DebatePage() {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero */}
-      <section className="px-6 pt-32 pb-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-red-500/10 px-4 py-2 text-sm font-medium text-red-400 mb-6">
+      {/* Hero — 매수 vs 매도 에너지 충돌 */}
+      <section className="relative px-6 pt-32 pb-20 overflow-hidden" style={{ background: "linear-gradient(180deg, #0c0515 0%, #0d1117 60%, hsl(var(--background)) 100%)" }}>
+        <VersusClash />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0c0515]/40 via-transparent to-[#0d1117]/80 pointer-events-none" style={{ zIndex: 1 }} />
+        <div className="relative mx-auto max-w-4xl text-center" style={{ zIndex: 2 }}>
+          <div className="inline-flex items-center gap-2 rounded-full bg-red-500/10 px-4 py-2 text-sm font-medium text-red-400 mb-6 backdrop-blur-sm">
             <span className="h-2 w-2 animate-pulse rounded-full bg-red-500" /> LIVE 토론
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
