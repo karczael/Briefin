@@ -53,8 +53,8 @@ export default function TermsPage() {
           <Section title="제5조 (서비스의 내용)">
             <ol className="list-decimal pl-5 space-y-2">
               <li><strong>Free 등급</strong>: 모닝 브리핑 전문, 리서치 하루 1편, 자유 토론방 참여, 기본 시황</li>
-              <li><strong>Premium 등급</strong> (월 4,000원): 광고 제거</li>
-              <li><strong>VIP 등급</strong> (월 9,000원): 광고 제거 + VIP 기능</li>
+              <li><strong>Premium 등급</strong> (이벤트 기간 무료): 전체 브리핑, 리서치 전문, 토론 상세, 밸류에이션, 팟캐스트</li>
+              <li><strong>VIP 등급</strong> (월 9,000원): Premium 전체 + 광고 제거 + 전략 설정, 매매 신호, 1:1 상담</li>
               <li>서비스 내용은 회사의 사정에 따라 변경될 수 있으며, 변경 시 사전 공지합니다.</li>
             </ol>
           </Section>

@@ -9,14 +9,14 @@ import { apiPost } from "@/lib/api"
 const PLANS: Record<string, { name: string; price: number; priceLabel: string; features: string[]; eventLabel?: string }> = {
   premium: {
     name: "Premium",
-    price: 4000,
-    priceLabel: "₩4,000/월",
+    price: 0,
+    priceLabel: "무료",
     eventLabel: "이벤트 기간 무료!",
     features: [
-      "Free 전체 기능 포함",
-      "리서치 리포트 광고 제거",
-      "토론 상세 광고 제거",
-      "모든 콘텐츠 광고 없이 이용",
+      "전체 브리핑 (모닝/점심/클로징)",
+      "AI 리서치 전문 읽기",
+      "토론방 상세 분석",
+      "밸류에이션 차트 + 팟캐스트",
     ],
   },
   vip: {
@@ -137,7 +137,7 @@ function SubscribeContent() {
               <p className="font-bold text-emerald-600 dark:text-emerald-400">🎉 오픈 이벤트 진행 중</p>
               <p className="text-sm text-[hsl(var(--muted-foreground))]">
                 지금 가입하면 <strong>Premium 1개월 무료</strong>! 결제 없이 바로 시작하세요.
-                모든 콘텐츠를 광고 없이 이용할 수 있습니다.
+                모든 프리미엄 콘텐츠를 이용할 수 있습니다.
               </p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[hsl(var(--muted-foreground))]">
                 <span>✓ 결제 정보 불필요</span>

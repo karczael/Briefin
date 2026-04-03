@@ -45,7 +45,7 @@ function SuccessContent() {
         <div className="rounded-2xl bg-[hsl(var(--card))] border border-[hsl(var(--border))] p-6 text-left space-y-3">
           <div className="flex items-center gap-3">
             <span className="text-green-500 text-lg">✓</span>
-            <span className="text-sm">모든 콘텐츠를 광고 없이 1개월간 이용하세요</span>
+            <span className="text-sm">모든 프리미엄 콘텐츠를 1개월간 이용하세요</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-green-500 text-lg">✓</span>

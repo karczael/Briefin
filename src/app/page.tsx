@@ -192,7 +192,7 @@ export default function LandingPage() {
           {/* 이벤트 배너 */}
           <div className="mt-8 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 p-5 text-center">
             <p className="text-lg font-bold text-emerald-500">🎉 오픈 이벤트 진행 중</p>
-            <p className="text-sm text-[hsl(var(--muted-foreground))] mt-1">가입만 하면 <strong>Premium 1개월 무료</strong> — 모든 콘텐츠를 광고 없이 이용하세요</p>
+            <p className="text-sm text-[hsl(var(--muted-foreground))] mt-1">가입만 하면 <strong>Premium 1개월 무료</strong> — 모든 프리미엄 콘텐츠를 이용하세요</p>
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
@@ -208,18 +208,18 @@ export default function LandingPage() {
               </ul>
             </div>
 
-            {/* Premium (광고 제거) */}
+            {/* Premium */}
             <div className="relative rounded-3xl border-2 border-blue-500 bg-blue-500/5 p-8">
               <div className="absolute -top-3 left-6 rounded-full bg-emerald-500 px-4 py-1 text-xs font-bold text-white">이벤트 무료</div>
               <h3 className="text-lg font-bold">Premium</h3>
-              <p className="mt-6"><span className="text-3xl font-bold">₩4,000</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
-              <p className="text-xs text-[hsl(var(--muted-foreground))]">광고 없는 쾌적한 이용</p>
+              <p className="mt-6"><span className="text-3xl font-bold">무료</span></p>
+              <p className="text-xs text-emerald-500 font-medium">이벤트 기간 중 무료</p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
-                  "Free 전체 기능 포함",
-                  "리서치 리포트 광고 제거",
-                  "토론 상세 광고 제거",
-                  "모든 콘텐츠 광고 없이 이용",
+                  "전체 브리핑 (모닝/점심/클로징)",
+                  "AI 리서치 전문 읽기",
+                  "토론방 상세 분석",
+                  "밸류에이션 차트 + 팟캐스트",
                 ].map((f) => (
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-blue-400" />{f}</li>
                 ))}
