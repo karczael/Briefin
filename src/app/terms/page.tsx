@@ -53,8 +53,8 @@ export default function TermsPage() {
           <Section title="제5조 (서비스의 내용)">
             <ol className="list-decimal pl-5 space-y-2">
               <li><strong>Free 등급</strong>: 모닝 브리핑 전문, 리서치 하루 1편, 자유 토론방 참여, 기본 시황</li>
-              <li><strong>Premium 등급</strong> (월 9,900원): 전체 브리핑, 리서치 전문, 토론 상세, 밸류에이션 차트, 기업 분석, 팟캐스트</li>
-              <li><strong>VIP 등급</strong> (월 19,800원): Premium 전체 + 전략 설정, 매매 신호 알림, 토론 참여, 자동 손절 서비스</li>
+              <li><strong>Premium 등급</strong> (월 4,000원): 광고 제거</li>
+              <li><strong>VIP 등급</strong> (월 9,000원): 광고 제거 + VIP 기능</li>
               <li>서비스 내용은 회사의 사정에 따라 변경될 수 있으며, 변경 시 사전 공지합니다.</li>
             </ol>
           </Section>
@@ -74,7 +74,7 @@ export default function TermsPage() {
           <Section title="제7조 (구독 및 결제)">
             <ol className="list-decimal pl-5 space-y-2">
               <li>유료 구독은 월 단위 자동 결제로 진행됩니다.</li>
-              <li>신규 이용자에게는 14일간의 무료 체험이 제공되며, 체험 기간 내 해지 시 요금이 부과되지 않습니다.</li>
+              <li>오픈 이벤트 기간 중 가입 시 Premium 1개월 무료가 제공됩니다. 이벤트 종료 후 Free로 자동 전환됩니다.</li>
               <li>구독 해지는 설정 메뉴에서 언제든 가능하며, 해지 시 남은 이용 기간까지 서비스를 이용할 수 있습니다.</li>
               <li>환불은 관련 법령(전자상거래법)에 따라 처리됩니다.</li>
             </ol>

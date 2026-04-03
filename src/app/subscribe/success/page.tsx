@@ -5,11 +5,6 @@ import { CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { useEffect } from "react"
 
-const TIER_NAMES: Record<string, string> = {
-  premium: "Premium",
-  vip: "VIP",
-}
-
 export default function SubscribeSuccessPage() {
   return (
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><span className="h-8 w-8 border-2 border-green-500/30 border-t-green-500 rounded-full animate-spin" /></div>}>
@@ -20,10 +15,9 @@ export default function SubscribeSuccessPage() {
 
 function SuccessContent() {
   const searchParams = useSearchParams()
-  const tier = searchParams.get("tier") || "premium"
   const token = searchParams.get("token")
 
-  // 토큰 저장 (백엔드에서 리다이렉트 시 전달)
+  // 토큰 저장
   useEffect(() => {
     if (token) {
       localStorage.setItem("access_token", token)
@@ -41,9 +35,9 @@ function SuccessContent() {
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-2xl font-bold">구독이 시작되었습니다!</h1>
+          <h1 className="text-2xl font-bold">가입 완료!</h1>
           <p className="text-[hsl(var(--muted-foreground))]">
-            {TIER_NAMES[tier] || tier} 요금제의 <strong>14일 무료 체험</strong>이 시작되었습니다.
+            🎉 <strong>Premium 1개월 무료</strong> 이벤트가 적용되었습니다.
           </p>
         </div>
 
@@ -51,15 +45,15 @@ function SuccessContent() {
         <div className="rounded-2xl bg-[hsl(var(--card))] border border-[hsl(var(--border))] p-6 text-left space-y-3">
           <div className="flex items-center gap-3">
             <span className="text-green-500 text-lg">✓</span>
-            <span className="text-sm">모든 프리미엄 기능을 14일간 무료로 이용하세요</span>
+            <span className="text-sm">모든 콘텐츠를 광고 없이 1개월간 이용하세요</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-green-500 text-lg">✓</span>
-            <span className="text-sm">14일 이내 해지 시 비용이 청구되지 않습니다</span>
+            <span className="text-sm">결제 정보 등록 없이 바로 시작됩니다</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-green-500 text-lg">✓</span>
-            <span className="text-sm">설정 &gt; 구독 관리에서 언제든 해지 가능합니다</span>
+            <span className="text-sm">이벤트 종료 후 Free로 자동 전환됩니다</span>
           </div>
         </div>
 

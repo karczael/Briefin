@@ -170,7 +170,7 @@ export default function ResearchPage() {
                     </div>
                     <p className="font-bold text-sm">시나리오 분석 · 투자 전략은<br />Premium에서 확인하세요</p>
                     <Link href="/#pricing" className="mt-4 inline-block rounded-xl bg-blue-500 px-6 py-2.5 text-sm font-semibold text-white hover:bg-blue-600 transition-colors">
-                      14일 무료 체험
+                      무료로 시작하기
                     </Link>
                   </div>
                 </div>

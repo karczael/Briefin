@@ -38,7 +38,7 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center pt-2">
             <Link href="/#pricing" className="w-full sm:w-auto rounded-2xl bg-blue-500 px-8 py-4 text-center font-semibold text-white hover:bg-blue-600 transition-all hover:scale-[1.02]">
-              14일 무료 체험 시작하기
+              무료로 시작하기
             </Link>
             <Link href="/#podcast" className="w-full sm:w-auto rounded-2xl border border-[hsl(var(--border))] px-8 py-4 text-center font-medium hover:bg-[hsl(var(--muted))] transition-colors">
               🎧 팟캐스트 듣기
@@ -187,53 +187,62 @@ export default function LandingPage() {
       <section id="pricing" className="px-6 py-24">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-center text-3xl font-bold">요금제</h2>
-          <p className="mt-4 text-center text-[hsl(var(--muted-foreground))]">14일간 모든 기능을 무료로 체험해보세요</p>
+          <p className="mt-4 text-center text-[hsl(var(--muted-foreground))]">지금 가입하면 모든 회원 Premium 무료!</p>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-3">
+          {/* 이벤트 배너 */}
+          <div className="mt-8 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 p-5 text-center">
+            <p className="text-lg font-bold text-emerald-500">🎉 오픈 이벤트 진행 중</p>
+            <p className="text-sm text-[hsl(var(--muted-foreground))] mt-1">가입만 하면 <strong>Premium 1개월 무료</strong> — 모든 콘텐츠를 광고 없이 이용하세요</p>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {/* Free */}
             <div className="rounded-3xl border border-[hsl(var(--border))] p-8">
               <h3 className="text-lg font-bold">Free</h3>
               <p className="mt-6 text-3xl font-bold">₩0</p>
               <p className="text-sm text-[hsl(var(--muted-foreground))]">영구 무료</p>
               <ul className="mt-6 space-y-3 text-sm">
-                {["모닝 브리핑 전문 (매일)", "AI 리서치 하루 1편", "자유 토론방 참여", "기본 시황", "관심종목 관리"].map((f) => (
+                {["전체 브리핑 이용", "AI 리서치 리포트", "AI 토론 시청", "기본 시황 · 뉴스", "리서치/토론 시 광고 노출"].map((f) => (
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-[hsl(var(--muted-foreground))]" />{f}</li>
                 ))}
               </ul>
             </div>
 
-            {/* Premium */}
+            {/* Premium (광고 제거) */}
             <div className="relative rounded-3xl border-2 border-blue-500 bg-blue-500/5 p-8">
-              <div className="absolute -top-3 left-6 rounded-full bg-blue-500 px-4 py-1 text-xs font-bold text-white">추천</div>
+              <div className="absolute -top-3 left-6 rounded-full bg-emerald-500 px-4 py-1 text-xs font-bold text-white">이벤트 무료</div>
               <h3 className="text-lg font-bold">Premium</h3>
-              <p className="mt-6"><span className="text-3xl font-bold">₩9,900</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
-              <p className="text-xs text-[hsl(var(--muted-foreground))]">하루 약 330원</p>
+              <p className="mt-6"><span className="text-3xl font-bold">₩4,000</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
+              <p className="text-xs text-[hsl(var(--muted-foreground))]">광고 없는 쾌적한 이용</p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
-                  "전체 브리핑 (모닝/점심/클로징)",
-                  "AI 리서치 전문 읽기", "토론방 상세 분석",
-                  "밸류에이션 차트 + 적정가 계산기", "팟캐스트 (출퇴근길 청취)",
-                  "기업 분석 + 실적 전망",
+                  "Free 전체 기능 포함",
+                  "리서치 리포트 광고 제거",
+                  "토론 상세 광고 제거",
+                  "모든 콘텐츠 광고 없이 이용",
                 ].map((f) => (
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-blue-400" />{f}</li>
                 ))}
               </ul>
-              <Link href="/subscribe?plan=premium" className="mt-8 block w-full rounded-2xl bg-blue-500 py-4 font-semibold text-white text-center hover:bg-blue-600 transition-colors">14일 무료 체험</Link>
+              <Link href="/subscribe" className="mt-8 block w-full rounded-2xl bg-blue-500 py-4 font-semibold text-white text-center hover:bg-blue-600 transition-colors">무료로 시작하기</Link>
             </div>
 
             {/* VIP */}
             <div className="rounded-3xl border border-[hsl(var(--border))] bg-gradient-to-b from-[hsl(var(--card))] to-transparent p-8">
+              <div className="absolute -top-3 right-6 rounded-full bg-yellow-500 px-4 py-1 text-xs font-bold text-black">할인 중</div>
               <h3 className="text-lg font-bold flex items-center gap-2"><Zap className="h-5 w-5 text-yellow-400" /> VIP</h3>
-              <p className="mt-6"><span className="text-3xl font-bold">₩19,800</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span></p>
+              <p className="mt-6">
+                <span className="text-3xl font-bold">₩9,000</span><span className="text-sm text-[hsl(var(--muted-foreground))]">/월</span>
+              </p>
               <p className="text-xs text-[hsl(var(--muted-foreground))]">프로 투자자를 위한</p>
               <ul className="mt-6 space-y-3 text-sm">
                 {[
-                  "Premium 전체 기능",
+                  "광고 완전 제거",
                   "매매 전략 설정 (12개 전략)",
                   "실시간 매매 신호 알림",
                   "전략 백테스트",
                   "자동 손절 서비스 (KIS 연동)",
-                  "토론방 직접 참여 (AI 답변)",
+                  "1:1 AI 애널리스트 상담",
                 ].map((f) => (
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-yellow-400" />{f}</li>
                 ))}

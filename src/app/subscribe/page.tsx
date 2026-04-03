@@ -1,62 +1,44 @@
 "use client"
-import { Suspense, useState, useEffect, useRef } from "react"
+import { Suspense, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Check, Shield, ArrowLeft, Zap, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { apiPost } from "@/lib/api"
-import { loadTossPayments } from "@tosspayments/tosspayments-sdk"
 
-const TOSS_CLIENT_KEY = process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY || ""
-
-// 요금제 정보
-const PLANS: Record<string, { name: string; price: number; priceLabel: string; features: string[] }> = {
+// 요금제 정보 (이벤트 가격)
+const PLANS: Record<string, { name: string; price: number; priceLabel: string; features: string[]; eventLabel?: string }> = {
   premium: {
     name: "Premium",
-    price: 9900,
-    priceLabel: "₩9,900/월",
+    price: 4000,
+    priceLabel: "₩4,000/월",
+    eventLabel: "이벤트 기간 무료!",
     features: [
-      "전체 브리핑 (모닝/점심/클로징)",
-      "AI 리서치 전문 읽기",
-      "토론방 상세 분석",
-      "밸류에이션 차트 + 적정가 계산기",
-      "팟캐스트 (출퇴근길 청취)",
-      "기업 분석 + 실적 전망",
+      "Free 전체 기능 포함",
+      "리서치 리포트 광고 제거",
+      "토론 상세 광고 제거",
+      "모든 콘텐츠 광고 없이 이용",
     ],
   },
   vip: {
     name: "VIP",
-    price: 19800,
-    priceLabel: "₩19,800/월",
+    price: 9000,
+    priceLabel: "₩9,000/월",
+    eventLabel: "할인 중",
     features: [
-      "Premium 전체 기능",
+      "광고 완전 제거",
       "매매 전략 설정 (12개 전략)",
       "실시간 매매 신호 알림",
       "전략 백테스트",
       "자동 손절 서비스 (KIS 연동)",
-      "토론방 직접 참여 (AI 답변)",
+      "1:1 AI 애널리스트 상담",
     ],
   },
-}
-
-// 고객 키 생성 (빌링용)
-function generateCustomerKey(): string {
-  const timestamp = Date.now()
-  const random = Math.random().toString(36).substring(2, 10)
-  return `cust-${timestamp}-${random}`
 }
 
 interface RegisterResponse {
   access_token: string
   refresh_token: string
   token_type: string
-}
-
-interface BillingKeyResponse {
-  success: boolean
-  tier: string
-  trial_ends_at: string
-  expires_at: string
-  message: string
 }
 
 export default function SubscribePage() {
@@ -78,142 +60,35 @@ function SubscribeContent() {
   const [agreed, setAgreed] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const [step, setStep] = useState<"form" | "billing_callback">("form")
-  const tossRef = useRef<any>(null)
-
-  // SDK 초기화
-  useEffect(() => {
-    if (!TOSS_CLIENT_KEY) return
-    loadTossPayments(TOSS_CLIENT_KEY)
-      .then((toss) => { tossRef.current = toss })
-      .catch((err) => console.error("토스 SDK 로드 실패:", err))
-  }, [])
-
-  // URL 파라미터에서 토스 빌링 인증 결과 처리 (콜백)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const authKey = params.get("authKey")
-    const customerKey = params.get("customerKey")
-    const callbackPlanId = params.get("planId")
-
-    if (authKey && customerKey && callbackPlanId) {
-      setStep("billing_callback")
-      handleBillingCallback(authKey, customerKey, callbackPlanId)
-    }
-
-    // 결제 실패/취소 시
-    const payError = params.get("error")
-    if (payError) {
-      setError("결제가 취소되었거나 실패했습니다. 다시 시도해주세요.")
-    }
-  }, [])
-
-  // 빌링 인증 콜백 → 백엔드에 빌링키 발급 요청
-  const handleBillingCallback = async (authKey: string, customerKey: string, callbackPlanId: string) => {
-    setLoading(true)
-    const token = localStorage.getItem("access_token")
-    if (!token) {
-      setError("인증 정보가 없습니다. 처음부터 다시 시도해주세요.")
-      setStep("form")
-      setLoading(false)
-      return
-    }
-
-    try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api/v1"
-      const res = await fetch(`${API_URL}/subscriptions/toss/billing-key`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          auth_key: authKey,
-          customer_key: customerKey,
-          plan_id: callbackPlanId,
-        }),
-      })
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ detail: "빌링키 발급에 실패했습니다" }))
-        throw new Error(err.detail || "구독 처리에 실패했습니다")
-      }
-
-      const data: BillingKeyResponse = await res.json()
-      if (data.success) {
-        // 성공 → 성공 페이지로 이동
-        window.location.href = `/subscribe/success?token=${token}&tier=${callbackPlanId}`
-      }
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "구독 처리 중 오류가 발생했습니다")
-      setStep("form")
-    } finally {
-      setLoading(false)
-    }
-  }
 
   // 이메일 형식 검사
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const isFormValid = isEmailValid && password.length >= 8 && nickname.length >= 1 && agreed
 
-  // 회원가입 → 토스 빌링 인증 요청
+  // 회원가입 → 바로 성공 (결제 없이 가입만)
   const handleSubmit = async () => {
     if (!isFormValid || loading) return
-    if (!tossRef.current) {
-      setError("결제 모듈을 불러오는 중입니다. 잠시 후 다시 시도해주세요.")
-      return
-    }
-
     setLoading(true)
     setError("")
 
     try {
-      // 1단계: 회원가입 → JWT 획득
+      // 회원가입 → JWT 획득 (백엔드에서 Premium 1개월 자동 적용)
       const data = await apiPost<RegisterResponse>("/auth/register", {
         email,
         password,
         nickname,
       })
 
-      // JWT 저장 (빌링키 발급 시 필요)
+      // JWT 저장
       localStorage.setItem("access_token", data.access_token)
       localStorage.setItem("refresh_token", data.refresh_token)
 
-      // 2단계: 토스 빌링 인증 (카드 등록)
-      const customerKey = generateCustomerKey()
-      const currentUrl = `${window.location.origin}/subscribe`
-      const payment = tossRef.current.payment({ customerKey })
-
-      await payment.requestBillingAuth({
-        method: "CARD",
-        successUrl: `${currentUrl}?planId=${planId}`,
-        failUrl: `${currentUrl}?error=billing_failed`,
-      })
+      // 성공 페이지로 이동
+      window.location.href = `/subscribe/success?tier=${planId}`
     } catch (e) {
       setError(e instanceof Error ? e.message : "오류가 발생했습니다")
       setLoading(false)
     }
-  }
-
-  // 빌링 콜백 처리 중 화면
-  if (step === "billing_callback") {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-6 bg-[hsl(var(--background))]">
-        <div className="text-center space-y-4">
-          <Loader2 className="h-10 w-10 animate-spin mx-auto text-blue-500" />
-          <p className="text-lg font-medium">구독을 처리하고 있습니다...</p>
-          <p className="text-sm text-[hsl(var(--muted-foreground))]">잠시만 기다려주세요</p>
-          {error && (
-            <div className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400 mt-4">
-              {error}
-              <Link href={`/subscribe?plan=${planId}`} className="block mt-2 underline">
-                다시 시도하기
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -223,7 +98,7 @@ function SubscribeContent() {
         <Link href="/#pricing" className="p-2 rounded-xl hover:bg-[hsl(var(--muted))] transition-colors">
           <ArrowLeft className="h-5 w-5" />
         </Link>
-        <span className="font-semibold">구독 시작하기</span>
+        <span className="font-semibold">무료로 시작하기</span>
       </div>
 
       <div className="mx-auto max-w-lg px-6 py-8 space-y-8">
@@ -238,9 +113,11 @@ function SubscribeContent() {
               </div>
               <p className="text-2xl font-bold mt-1">{plan.priceLabel}</p>
             </div>
-            <div className="rounded-full bg-green-500/10 px-4 py-2 text-sm font-bold text-green-500">
-              14일 무료
-            </div>
+            {plan.eventLabel && (
+              <div className="rounded-full bg-emerald-500/10 px-4 py-2 text-sm font-bold text-emerald-500">
+                {plan.eventLabel}
+              </div>
+            )}
           </div>
           <ul className="mt-4 space-y-2">
             {plan.features.map((f) => (
@@ -252,20 +129,20 @@ function SubscribeContent() {
           </ul>
         </div>
 
-        {/* ─── 안심 배너 ─── */}
-        <div className="rounded-2xl bg-green-500/5 border border-green-500/20 p-5">
+        {/* ─── 이벤트 배너 ─── */}
+        <div className="rounded-2xl bg-emerald-500/5 border border-emerald-500/20 p-5">
           <div className="flex items-start gap-3">
-            <Shield className="h-6 w-6 text-green-500 shrink-0 mt-0.5" />
+            <Shield className="h-6 w-6 text-emerald-500 shrink-0 mt-0.5" />
             <div className="space-y-2">
-              <p className="font-bold text-green-600 dark:text-green-400">지금은 절대 결제되지 않습니다</p>
+              <p className="font-bold text-emerald-600 dark:text-emerald-400">🎉 오픈 이벤트 진행 중</p>
               <p className="text-sm text-[hsl(var(--muted-foreground))]">
-                결제 정보를 등록만 해두고, <strong>14일간 모든 기능을 무료</strong>로 이용해보세요.
-                14일이 되기 전에 언제든 취소할 수 있으며, 취소 시 비용이 청구되지 않습니다.
+                지금 가입하면 <strong>Premium 1개월 무료</strong>! 결제 없이 바로 시작하세요.
+                모든 콘텐츠를 광고 없이 이용할 수 있습니다.
               </p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[hsl(var(--muted-foreground))]">
-                <span>✓ 0원 결제</span>
-                <span>✓ 14일 내 취소 가능</span>
-                <span>✓ 자동 갱신 해지 자유</span>
+                <span>✓ 결제 정보 불필요</span>
+                <span>✓ 가입 즉시 Premium 적용</span>
+                <span>✓ 1개월 무료 이용</span>
               </div>
             </div>
           </div>
@@ -337,7 +214,7 @@ function SubscribeContent() {
           </div>
         )}
 
-        {/* ─── 토스 결제 버튼 ─── */}
+        {/* ─── 가입 버튼 ─── */}
         <button
           onClick={handleSubmit}
           disabled={!isFormValid || loading}
@@ -346,24 +223,21 @@ function SubscribeContent() {
           {loading ? (
             <span className="flex items-center justify-center gap-2">
               <Loader2 className="h-5 w-5 animate-spin" />
-              처리 중...
+              가입 중...
             </span>
           ) : (
-            "무료 체험 시작하기"
+            "무료로 시작하기"
           )}
         </button>
 
-        {/* ─── 하단 안심 문구 ─── */}
+        {/* ─── 하단 안내 ─── */}
         <div className="text-center space-y-2 pb-8">
           <p className="text-sm font-medium text-[hsl(var(--muted-foreground))]">
-            지금 결제되지 않습니다 · 14일 무료 체험
+            결제 없이 가입 · Premium 1개월 무료
           </p>
           <p className="text-xs text-[hsl(var(--muted-foreground))]">
-            무료 체험 기간 중 언제든 해지할 수 있으며,<br />
-            해지 시 요금이 청구되지 않습니다.
-          </p>
-          <p className="text-xs text-[hsl(var(--muted-foreground))]">
-            체험 종료 후 월 {plan.priceLabel} 자동 결제 · 언제든 해지 가능
+            이벤트 종료 후 Free로 전환됩니다.<br />
+            유료 구독은 앱 내에서 진행할 수 있습니다.
           </p>
         </div>
 

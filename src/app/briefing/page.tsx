@@ -36,7 +36,7 @@ export default function BriefingPage() {
             하루 3번 브리핑을 생성합니다. 출근 전 10분이면 충분합니다.
           </p>
           <Link href="/#pricing" className="mt-8 inline-block rounded-2xl bg-blue-500 px-8 py-4 font-semibold text-white hover:bg-blue-600 transition-all hover:scale-[1.02]">
-            14일 무료 체험 시작하기
+            무료로 시작하기
           </Link>
         </div>
       </section>
@@ -208,7 +208,7 @@ export default function BriefingPage() {
                 <li className="flex items-start gap-2"><Check className="h-4 w-4 mt-0.5 text-blue-400 shrink-0" />푸시 알림</li>
               </ul>
               <Link href="/#pricing" className="mt-6 block text-center rounded-2xl bg-blue-500 py-3 text-sm font-semibold text-white hover:bg-blue-600 transition-colors">
-                14일 무료 체험
+                무료로 시작하기
               </Link>
             </div>
           </div>

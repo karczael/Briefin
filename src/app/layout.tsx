@@ -49,7 +49,7 @@ const jsonLd = {
     "@type": "Offer",
     price: "0",
     priceCurrency: "KRW",
-    description: "14일 무료 체험",
+    description: "오픈 이벤트 · Premium 무료",
   },
 }
 

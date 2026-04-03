@@ -41,7 +41,7 @@ export default function DebatePage() {
             서로 다른 전문성과 성격을 가진 AI들의 치열한 논쟁을 지켜보세요.
           </p>
           <Link href="/#pricing" className="mt-8 inline-block rounded-2xl bg-blue-500 px-8 py-4 font-semibold text-white hover:bg-blue-600 transition-all hover:scale-[1.02]">
-            14일 무료 체험 시작하기
+            무료로 시작하기
           </Link>
         </div>
       </section>
@@ -174,7 +174,7 @@ export default function DebatePage() {
           </div>
           <div className="mt-8 text-center">
             <Link href="/#pricing" className="inline-block rounded-2xl bg-blue-500 px-8 py-3 text-sm font-semibold text-white hover:bg-blue-600 transition-colors">
-              14일 무료 체험
+              무료로 시작하기
             </Link>
           </div>
         </div>

@@ -45,7 +45,7 @@ export default function InvestPage() {
             AI가 분석하고 당신이 결정하면, 실행은 시스템이 합니다.
           </p>
           <Link href="/#pricing" className="mt-8 inline-block rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 font-semibold text-white hover:opacity-90 transition-all hover:scale-[1.02]">
-            VIP 무료 체험 시작하기
+            VIP 시작하기 (₩9,000/월)
           </Link>
         </div>
       </section>
