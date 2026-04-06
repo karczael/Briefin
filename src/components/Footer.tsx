@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="flex gap-6 text-sm text-[hsl(var(--muted-foreground))]">
             <Link href="/terms" className="hover:text-[hsl(var(--foreground))]">이용약관</Link>
             <Link href="/privacy" className="hover:text-[hsl(var(--foreground))]">개인정보처리방침</Link>
-            <a href="#contact" className="hover:text-[hsl(var(--foreground))]">문의</a>
+            <Link href="/contact" className="hover:text-[hsl(var(--foreground))]">문의</Link>
           </div>
         </div>
         {/* 사업자 정보 */}
