@@ -34,7 +34,7 @@ export default function LandingPage() {
           </h1>
           <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-xl mx-auto">
             시간 없는 당신을 위해, AI 전문가 10명이 매일 시장을 분석하고
-            실시간으로 토론합니다. 전략 설정부터 자동 손절까지.
+            실시간으로 토론합니다. 전략 설정부터 손절 알림까지.
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center pt-2">
             <Link href="/#pricing" className="w-full sm:w-auto rounded-2xl bg-blue-500 px-8 py-4 text-center font-semibold text-white hover:bg-blue-600 transition-all hover:scale-[1.02]">
@@ -125,10 +125,10 @@ export default function LandingPage() {
                 <span className="text-xs font-medium text-yellow-400 bg-yellow-500/10 rounded-full px-2 py-0.5">VIP</span>
               </div>
               <h3 className="text-xl font-bold">VIP 투자 도구</h3>
-              <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">12개 매매 전략 설정, 실시간 신호 알림, 자동 손절 서비스. 분석을 넘어 실전 투자까지 AI가 실행합니다.</p>
+              <p className="mt-3 text-sm text-[hsl(var(--muted-foreground))]">12개 매매 전략 설정, 실시간 신호 알림, 손절 알림 서비스. 분석을 넘어 실전 투자까지 AI가 도와드립니다.</p>
               <ul className="mt-4 space-y-1.5 text-sm text-[hsl(var(--muted-foreground))]">
                 <li>• RSI+MACD, 트레일링 스탑, 스윙 등 12개 전략</li>
-                <li>• 한국투자증권 API 연동 자동 손절</li>
+                <li>• 손절 라인 도달 시 텔레그램 알림</li>
                 <li>• 전략 백테스트 (최대 5년)</li>
               </ul>
               <div className="mt-6 flex items-center gap-1 text-sm font-medium text-blue-400 group-hover:text-blue-300">
@@ -241,7 +241,7 @@ export default function LandingPage() {
                   "매매 전략 설정 (12개 전략)",
                   "실시간 매매 신호 알림",
                   "전략 백테스트",
-                  "자동 손절 서비스 (KIS 연동)",
+                  "손절 알림 서비스 (텔레그램)",
                   "1:1 AI 애널리스트 상담",
                 ].map((f) => (
                   <li key={f} className="flex items-center gap-2"><Check className="h-4 w-4 text-yellow-400" />{f}</li>

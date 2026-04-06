@@ -41,8 +41,8 @@ export default function InvestPage() {
             <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">실전 투자까지</span>
           </h1>
           <p className="mt-6 text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
-            12개의 검증된 매매 전략 설정, 실시간 신호 알림, 자동 손절까지.
-            AI가 분석하고 당신이 결정하면, 실행은 시스템이 합니다.
+            12개의 검증된 매매 전략 설정, 실시간 신호 알림, 손절 알림까지.
+            AI가 분석하고, 중요한 순간을 텔레그램으로 알려드립니다.
           </p>
           <Link href="/#pricing" className="mt-8 inline-block rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-500 px-8 py-4 font-semibold text-white hover:opacity-90 transition-all hover:scale-[1.02]">
             VIP 시작하기 (₩9,000/월)
@@ -117,24 +117,24 @@ export default function InvestPage() {
             <div className="rounded-3xl border-2 border-red-500/30 bg-red-500/5 p-8">
               <div className="flex items-center gap-3 mb-6">
                 <Shield className="h-8 w-8 text-red-400" />
-                <h2 className="text-2xl font-bold">자동 손절 서비스</h2>
+                <h2 className="text-2xl font-bold">손절 알림 서비스</h2>
               </div>
               <p className="text-[hsl(var(--muted-foreground))] mb-6">
-                잠을 자는 동안에도 AI가 손실을 관리합니다. 설정한 손절선에 도달하면
-                한국투자증권 API를 통해 자동으로 매도를 실행합니다.
+                장중에도 시장을 계속 지켜볼 수 없으시죠? 설정한 손절선에 도달하면
+                텔레그램으로 즉시 알림을 보내드립니다. 매도 판단은 직접 하세요.
               </p>
               <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />종목별 손절 비율 설정 (-3% ~ -10%)</li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />종목별 손절 비율 설정 (-3% ~ -30%)</li>
                 <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />장중 3분 간격 실시간 모니터링</li>
-                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />한국투자증권 KIS API 연동 자동 매도</li>
-                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />매도 완료 시 즉시 푸시 알림</li>
-                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />손절 이력 + 총 방어 금액 대시보드</li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />손절선 도달 시 텔레그램 즉시 알림</li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />종목명, 등락률, 현재가, 손실액 상세 표시</li>
+                <li className="flex items-start gap-2"><Check className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />손절 알림 이력 대시보드</li>
               </ul>
 
               <div className="mt-6 rounded-2xl bg-red-500/10 p-4">
                 <p className="text-xs text-red-400 font-medium">작동 예시</p>
                 <p className="text-sm mt-1">삼성전자 보유가 72,000원 / 손절 -5% 설정</p>
-                <p className="text-sm">→ 68,400원 이하 도달 시 자동 시장가 매도 실행</p>
+                <p className="text-sm">→ 68,400원 이하 도달 시 텔레그램 알림 전송</p>
               </div>
             </div>
 
@@ -208,7 +208,7 @@ export default function InvestPage() {
       <section className="px-6 py-20">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold mb-4">증권사 API 연동</h2>
-          <p className="text-[hsl(var(--muted-foreground))] mb-8">보유종목 조회 + 자동 손절을 위해 증권사 API를 연동합니다</p>
+          <p className="text-[hsl(var(--muted-foreground))] mb-8">보유종목 조회 + 손절 알림을 위해 증권사 API를 연동합니다</p>
           <div className="grid gap-4 sm:grid-cols-3">
             {[
               { name: "한국투자증권", status: "지원", statusColor: "text-emerald-400 bg-emerald-500/10" },
@@ -222,7 +222,7 @@ export default function InvestPage() {
             ))}
           </div>
           <p className="mt-6 text-xs text-[hsl(var(--muted-foreground))]">
-            API 키는 암호화되어 저장되며, 매도 외 어떤 거래도 실행하지 않습니다
+            API 키는 암호화되어 저장되며, 보유종목 조회 목적으로만 사용됩니다
           </p>
         </div>
       </section>
